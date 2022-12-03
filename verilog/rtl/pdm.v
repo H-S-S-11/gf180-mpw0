@@ -1,4 +1,4 @@
-// 8-bit PDM driver
+// 5-bit PDM driver
 
 module pdm(
     input [4:0] pdm_input,

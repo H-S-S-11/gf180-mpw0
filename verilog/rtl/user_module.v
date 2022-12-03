@@ -4,7 +4,6 @@
 //  The pin connections within the user_module can change
 //  This allows use of the internal clock divider if you wish.
 module user_module(
-  input user_clock2,
   input [18:0] io_in, 
   output [18:0] io_out
 );
