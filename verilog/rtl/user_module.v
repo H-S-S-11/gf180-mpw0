@@ -1,88 +1,56 @@
-/* Automatically generated from https://wokwi.com/projects/334445762078310996 */
-
 `default_nettype none
 
-module user_module_334445762078310996(
-  input [7:0] io_in,
+//  Top level io for this module should stay the same to fit into the scan_wrapper.
+//  The pin connections within the user_module are up to you,
+//  although (if one is present) it is recommended to place a clock on io_in[0].
+//  This allows use of the internal clock divider if you wish.
+module user_module(
+  input [7:0] io_in, 
   output [7:0] io_out
 );
-  wire net1 = 1'b1;
-  wire net2 = 1'b0;
-  wire net3;
-  wire net4;
-  wire net5;
-  wire net6;
-  wire net7;
-  wire net8 = 1'b1;
-  wire net9 = 1'b0;
-  wire net10;
-  wire net11;
-  wire net12 = 1'b1;
-  wire net13 = 1'b0;
-  wire net14;
-  wire net15 = 1'b1;
-  wire net16 = 1'b0;
-  wire net17;
-  wire net18 = 1'b0;
-  wire net19 = 1'b1;
-  wire net20;
-  wire net21 = 1'b1;
-  wire net22;
-  wire net23;
-  wire net24 = 1'b0;
-  wire net25 = 1'b0;
 
-  and_cell gate1 (
-    .a (net3)
-  );
-  or_cell gate2 (
+  wire pdm_out;
 
-  );
-  xor_cell gate3 (
+  assign io_out[0] = pdm_out;
+  assign io_out[1] = ~pdm_out;
 
+  pdm pdm_core(
+    .pdm_input(io_in[7:3]),
+    .write_en(io_in[2]),
+    .reset(io_in[1]),
+    .clk(io_in[0]),    
+    .pdm_out(pdm_out)
   );
-  nand_cell gate4 (
-    .a (net4),
-    .b (net5),
-    .out (net6)
-  );
-  not_cell gate5 (
-    .in (net7),
-    .out (net5)
-  );
-  buffer_cell gate6 (
 
-  );
-  mux_cell mux1 (
-    .a (net8),
-    .b (net9),
-    .sel (net10),
-    .out (net11)
-  );
-  dff_cell flipflop1 (
+endmodule
 
-  );
-  mux_cell mux2 (
-    .a (net12),
-    .b (net13),
-    .sel (net10),
-    .out (net14)
-  );
-  mux_cell mux3 (
-    .a (net15),
-    .b (net16),
-    .sel (net10),
-    .out (net17)
-  );
-  mux_cell mux4 (
-    .a (net18),
-    .b (net19),
-    .sel (net10),
-    .out (net20)
-  );
-  and_cell gate7 (
-    .a (net22),
-    .b (net23),
-    .out (net4)
-  );
+//  Any submodules should be included in this file,
+//  so they are copied into the main TinyTapeout repo.
+//  Appending your ID to any submodules you create 
+//  ensures there are no clashes in full-chip simulation.
+module pdm(
+    input [4:0] pdm_input,
+    input       write_en,
+    input       clk, reset,    
+    output      pdm_out
+);
+
+reg [4:0] accumulator;
+reg [4:0] input_reg;
+
+wire [5:0] sum;
+
+assign sum = input_reg + accumulator;
+assign pdm_out = sum[5];
+
+always @(posedge clk or posedge reset) begin
+    if (reset) begin 
+        input_reg <= 5'h00 ;
+        accumulator <= 5'h00;
+    end else begin
+        accumulator <= sum[4:0];
+        if (write_en) input_reg <= pdm_input ;
+    end
+end
+
 endmodule
