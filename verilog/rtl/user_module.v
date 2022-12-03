@@ -1,12 +1,12 @@
 `default_nettype none
 
-//  Top level io for this module should stay the same to fit into the scan_wrapper.
-//  The pin connections within the user_module are up to you,
-//  although (if one is present) it is recommended to place a clock on io_in[0].
+//  Top level io for this module uses all available GPIO
+//  The pin connections within the user_module can change
 //  This allows use of the internal clock divider if you wish.
 module user_module(
-  input [7:0] io_in, 
-  output [7:0] io_out
+  input user_clock2,
+  input [18:0] io_in, 
+  output [18:0] io_out
 );
 
   wire pdm_out;
@@ -21,36 +21,5 @@ module user_module(
     .clk(io_in[0]),    
     .pdm_out(pdm_out)
   );
-
-endmodule
-
-//  Any submodules should be included in this file,
-//  so they are copied into the main TinyTapeout repo.
-//  Appending your ID to any submodules you create 
-//  ensures there are no clashes in full-chip simulation.
-module pdm(
-    input [4:0] pdm_input,
-    input       write_en,
-    input       clk, reset,    
-    output      pdm_out
-);
-
-reg [4:0] accumulator;
-reg [4:0] input_reg;
-
-wire [5:0] sum;
-
-assign sum = input_reg + accumulator;
-assign pdm_out = sum[5];
-
-always @(posedge clk or posedge reset) begin
-    if (reset) begin 
-        input_reg <= 5'h00 ;
-        accumulator <= 5'h00;
-    end else begin
-        accumulator <= sum[4:0];
-        if (write_en) input_reg <= pdm_input ;
-    end
-end
 
 endmodule

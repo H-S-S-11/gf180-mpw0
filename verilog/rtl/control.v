@@ -2,7 +2,7 @@
 
 timeunit 1ns; timeprecision 10ps;
 
-module fast_control(
+module control(
     input wire Clock, nReset,
     input wire [1:0] Ran,
     output wire [2:0] DiceValue
