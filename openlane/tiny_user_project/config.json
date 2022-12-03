@@ -3,7 +3,12 @@
     "DESIGN_IS_CORE": 0,
     "VERILOG_FILES": [
         "dir::../../verilog/rtl/user_module.v",
-        "dir::../../verilog/rtl/cells.v",
+        "dir::../../verilog/rtl/pdm.v",
+        "dir::../../verilog/rtl/dice.v",
+        "dir::../../verilog/rtl/dtype_synth.v",
+        "dir::../../verilog/rtl/encoder.v",
+        "dir::../../verilog/rtl/control.v",
+        "dir::../../verilog/rtl/random.v",
         "dir::../../verilog/rtl/defines.v",
         "dir::../../verilog/rtl/tiny_user_project.v"
     ],
@@ -13,7 +18,7 @@
     "FP_SIZING": "absolute",
     "DIE_AREA": "0 0 600 680",
     "PL_BASIC_PLACEMENT": 1,
-    "PL_TARGET_DENSITY": 0.70,
+    "PL_TARGET_DENSITY": 0.7,
     "SYNTH_USE_PG_PINS_DEFINES": "USE_POWER_PINS",
     "VDD_NETS": [
         "vdd"
