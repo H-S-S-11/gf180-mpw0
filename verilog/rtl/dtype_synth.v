@@ -1,7 +1,7 @@
 // structural model of edge triggered D type
 
 module dtype(
-  output logic Q, nQ,
+  output reg Q, nQ,
   input wire D, Clk, nRst
   );
 

@@ -4,7 +4,7 @@ module encoder(
   input wire [2:0] DiceValue,
   output wire L11, L12, L13, L21, L22, L23, L31, L32, L33
  );
-   logic [8:0] output_leds;
+   reg [8:0] output_leds;
  
    // Reading left to right then down
    assign {L11, L21, L31, L12, L22, L32, L13, L23, L33} = output_leds;

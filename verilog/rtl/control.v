@@ -6,10 +6,10 @@ module control(
     output wire [2:0] DiceValue
 );
 
-logic [2:0] dice_val, next_dice_value;
-logic n_1_or_6, n_2_or_5, n_3_or_4, enable_reg;
+reg [2:0] dice_val, next_dice_value;
+reg n_1_or_6, n_2_or_5, n_3_or_4, enable_reg;
 
-logic [2:0] gated[0:5];
+reg [2:0] gated[0:5];
 
 assign n_1_or_6 = !((dice_val==3'd1) | (dice_val==3'd6));
 assign n_2_or_5 = !((dice_val==3'd2) | (dice_val==3'd5));
