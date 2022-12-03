@@ -1,7 +1,5 @@
 // SystemVerilog structural model of a LFSR PRBS generator
 
-timeunit 1ns; timeprecision 10ps;
-
 module random(
   input wire Clock, nReset,
   output wire [1:0] Ran
