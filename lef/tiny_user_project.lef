@@ -4087,8 +4087,6 @@ MACRO tiny_user_project
         RECT 4.300 3.060 598.550 4.220 ;
         RECT 0.090 0.860 598.550 3.060 ;
         RECT 0.090 0.140 595.700 0.860 ;
-      LAYER Metal4 ;
-        RECT 63.980 300.250 77.140 335.350 ;
   END
 END tiny_user_project
 END LIBRARY
