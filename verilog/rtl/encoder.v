@@ -1,7 +1,5 @@
 // Behavioural model of LED encoder
 
-timeunit 1ns; timeprecision 10ps;
-
 module encoder(
   input wire [2:0] DiceValue,
   output wire L11, L12, L13, L21, L22, L23, L31, L32, L33
@@ -11,7 +9,7 @@ module encoder(
    // Reading left to right then down
    assign {L11, L21, L31, L12, L22, L32, L13, L23, L33} = output_leds;
    
-   always_comb begin
+   always@(*) begin
      case (DiceValue)
        3'd0: output_leds = 9'b000_000_000;
        3'd1: output_leds = 9'b000_010_000;

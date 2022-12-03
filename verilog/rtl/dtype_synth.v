@@ -5,9 +5,8 @@ module dtype(
   input wire D, Clk, nRst
   );
 
-timeunit 1ns; timeprecision 10ps;
 
-always_ff @(posedge Clk, negedge nRst) begin
+always@(posedge Clk, negedge nRst) begin
   if(~nRst) begin
     Q  <= 1'b0;
     nQ <= 1'b1;

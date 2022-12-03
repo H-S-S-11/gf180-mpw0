@@ -1,7 +1,5 @@
 // control module. Can't get out of error states except with reset
 
-timeunit 1ns; timeprecision 10ps;
-
 module control(
     input wire Clock, nReset,
     input wire [1:0] Ran,
@@ -36,7 +34,7 @@ assign gated[5] = 3'd6 & {3{n_1_or_6 & !Ran[0] &  !Ran[1] }};
 
 assign next_dice_value = gated[0] | gated[1] | gated[2] | gated[3] | gated[4] | gated[5];
 
-always_ff @(posedge Clock, negedge nReset) begin
+always@(posedge Clock, negedge nReset) begin
   if (!nReset) begin
     enable_reg <= 1'b0;
     dice_val <= 3'd1;

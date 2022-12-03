@@ -1,7 +1,5 @@
 // Structural top-level module of dice
 
-timeunit 1ns; timeprecision 10ps;
-
 module dice(
   input wire Clock, nReset,
   output wire TL, ML, BL, MC, TR, MR, BR

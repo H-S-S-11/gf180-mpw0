@@ -22,4 +22,13 @@ module user_module(
     .pdm_out(pdm_out)
   );
 
+  wire [6:0] leds;
+  assign io_out[8:2] = leds;
+
+  dice dice0(
+  .Clock(io_in[8]), .nReset(io_in[9]),
+  .TL(leds[0]), .ML(leds[1]), .BL(leds[2]), .MC(leds[3]),
+  .TR(leds[4]), .MR(leds[5]), .BR(leds[6])
+);
+
 endmodule
